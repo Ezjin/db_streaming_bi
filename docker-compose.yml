@@ -1,0 +1,38 @@
+version: '3'
+services:
+  flask-app:
+    build: .
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_DB=random_data
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    networks:
+      - app-network
+
+  db:
+    image: mysql:9.0.1
+    container_name: mysql_db
+    environment:
+      MYSQL_DATABASE: random_data
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root_password  # MySQL requires setting a root password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
