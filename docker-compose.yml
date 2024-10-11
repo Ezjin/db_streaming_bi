@@ -24,6 +24,9 @@ services:
 
   db:
     image: mysql:9.0.1
+    build:
+      context: ./mysql  # This is where your custom MySQL Dockerfile is
+      dockerfile: Dockerfile
     container_name: mysql_db
     environment:
       MYSQL_DATABASE: random_data

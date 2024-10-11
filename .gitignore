@@ -130,7 +130,7 @@ ENV/
 env.bak/
 venv.bak/
 data/
-
+mysql/
 # Spyder project settings
 .spyderproject
 .spyproject
