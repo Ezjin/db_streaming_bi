@@ -10,9 +10,9 @@ app = Flask(__name__)
 
 # MySQL connection details from environment variables
 DB_HOST = os.getenv('MYSQL_HOST', 'localhost')
-DB_NAME = os.getenv('MYSQL_DB', 'random_data')
-DB_USER = os.getenv('MYSQL_USER', 'user')
-DB_PASS = os.getenv('MYSQL_PASSWORD', 'password')
+DB_NAME = os.getenv('MYSQL_DB', 'testdb')
+DB_USER = os.getenv('MYSQL_USER', 'debezium')
+DB_PASS = os.getenv('MYSQL_PASSWORD', 'dbz')
 
 # Initialize the database
 def init_db():
@@ -24,7 +24,7 @@ def init_db():
     )
     cursor = conn.cursor()
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS data (
+        CREATE TABLE IF NOT EXISTS data_app (
             id INT AUTO_INCREMENT PRIMARY KEY,
             userid VARCHAR(255),
             timestamp VARCHAR(255),
@@ -45,7 +45,7 @@ def insert_row(userid, timestamp, value):
     )
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO data (userid, timestamp, value) VALUES (%s, %s, %s)
+        INSERT INTO data_app (userid, timestamp, value) VALUES (%s, %s, %s)
     ''', (userid, timestamp, value))
     conn.commit()
     cursor.close()

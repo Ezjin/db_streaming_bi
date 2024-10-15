@@ -1,7 +1,7 @@
 skip-host-cache
 skip-name-resolve
 
-user=user
+user=mysql
 symbolic-links=0
 
 server-id = 223344
